@@ -82,7 +82,7 @@ cd rag-doc-assistant
       ```
      <small># Enter your question when prompted. Answers will be generated from your PDFs.</small>
 
-Notes
+**Notes**\n
 Embeddings: Generated using sentence-transformers/all-MiniLM-L6-v2.
 Vector Store: FAISS is used for fast semantic search.
 LLM: Ollama’s gemma3:4b model generates answers.
