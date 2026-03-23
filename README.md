@@ -68,21 +68,19 @@ python src/chunk.py
 ```
      
 **Step 2: Chunk Documents**
-
-     ```bash
+   ```bash
      python src/chunk.py
+```
      
      
 **Step 3: Generate Embeddings & Vector Store**
-
      ```bash
      python src/embed.py
-     
-     
+     ```    
 **Step 4: Retrieval-Only Query**
-
      ```bash
      python src/query.py
+  ```
      
 <small>You will be prompted to enter a query at runtime.</small>
 
@@ -90,6 +88,7 @@ python src/chunk.py
 
     ```bash
     python src/qa.py
+```
 
 Ask natural-language questions and receive grounded answers.
 
