@@ -13,6 +13,7 @@ The project is designed to provide a scalable, local-first QA system over your d
 ---
 
 ## Project Structure
+```
 rag-doc-assistant/
 │
 ├── data/
@@ -30,7 +31,7 @@ rag-doc-assistant/
 ├── venv/ # Local virtual environment (excluded from GitHub)
 ├── requirements.txt # Project dependencies
 └── README.md # Project documentation
-
+```
 
 ---
 
