@@ -63,7 +63,8 @@ cd rag-doc-assistant
 ## Usage Instructions
 
 **Step 1: Ingest PDFs**
-   python src/chunk.py 
+   ```bash
+python src/chunk.py ``` 
      
 **Step 2: Chunk Documents**
 
