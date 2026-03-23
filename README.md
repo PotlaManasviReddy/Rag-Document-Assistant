@@ -64,7 +64,7 @@ cd rag-doc-assistant
 
 **Step 1: Ingest PDFs**
 
-     ```bash
+     bash
      python src/ingest.py
      
      
