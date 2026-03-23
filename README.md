@@ -103,10 +103,6 @@ Ask natural-language questions and receive grounded answers.
 - **Ollama:** Ensure the Ollama app is installed and running locally before using `qa.py`.
 - **Prompting:** Uses a single-question-based prompt to produce precise answers.
 
-## Source Material
-
-This project was tested using content from:
-   - **Spark:** The Definitive Guide(Bill Chambers & Matei Zaharia)
 
 ## What This Demonstrates
    - End-to-end RAG pipeline design
