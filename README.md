@@ -55,3 +55,29 @@ cd rag-doc-assistant
    ```bash
    pip install -r requirements.txt
    ```   
+5. **Add your PDF documents**
+     ```bash
+     data/raw/
+     ```
+6. **Load PDFs**
+   ```bash
+   python src/ingest.py
+   ```
+7. **Chunk documents**
+   ```bash
+   python src/chunk.py
+   ```
+9. **Generate embeddings & create vector store**
+   ```bash
+   python src/embed.py
+   ```
+10. Query programmatically
+    # Edit src/query.py to set your query, then run
+    ```bash
+    python src/query.py
+    ```
+10. **Interactive QA**
+      ```bash
+      python src/qa.py
+      ```
+     # Enter your question when prompted. Answers will be generated from your PDFs.
