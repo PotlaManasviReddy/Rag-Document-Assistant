@@ -72,9 +72,10 @@ python src/chunk.py
      python src/chunk.py
 ```     
 **Step 3: Generate Embeddings & Vector Store**
-     ```bash
+      ```bash
       python src/embed.py
-     ```    
+      ```
+        
 **Step 4: Retrieval-Only Query**
      ```bash
         python src/query.py
