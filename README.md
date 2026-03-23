@@ -44,7 +44,6 @@ rag-doc-assistant/
 git clone <your-repo-url>
 cd rag-doc-assistant
 ```
-
 2. **Create a virtual environment**
    ``` bash
    python -m venv venv
@@ -85,13 +84,11 @@ cd rag-doc-assistant
 <small>You will be prompted to enter a query at runtime.</small>
 
 **Step 5: Full Question Answering (RAG)**
-
     ```bash
     python src/qa.py
     ```
 Ask natural-language questions and receive grounded answers.
-      ```
-     <small># Enter your question when prompted. Answers will be generated from your PDFs.</small>
+<small># Enter your question when prompted. Answers will be generated from your PDFs.</small>
 
 ## Notes
 
