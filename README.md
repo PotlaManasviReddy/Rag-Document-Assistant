@@ -80,4 +80,4 @@ cd rag-doc-assistant
       ```bash
       python src/qa.py
       ```
-     # Enter your question when prompted. Answers will be generated from your PDFs.
+     <small># Enter your question when prompted. Answers will be generated from your PDFs.</small>
