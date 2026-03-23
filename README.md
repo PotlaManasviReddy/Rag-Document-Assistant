@@ -41,5 +41,7 @@ rag-doc-assistant/
 ```bash
 git clone <your-repo-url>
 cd rag-doc-assistant
+```
 
-2 Create a virtual environment
+2. **Create a virtual environment**
+   ```python -m venv venv```
