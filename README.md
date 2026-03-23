@@ -44,4 +44,6 @@ cd rag-doc-assistant
 ```
 
 2. **Create a virtual environment**
-   ```python -m venv venv```
+   ``` bash
+   python -m venv venv
+   ```
