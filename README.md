@@ -77,9 +77,9 @@ python src/chunk.py
   python src/embed.py
   ```
 **Step 4: Retrieval-Only Query**
-     ```bash
-   python src/query.py
- ```
+```bash
+python src/query.py
+```
 
 <small>You will be prompted to enter a query at runtime.</small>
 
