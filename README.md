@@ -47,3 +47,11 @@ cd rag-doc-assistant
    ``` bash
    python -m venv venv
    ```
+3. **Activate the virtual environment**
+   ```bash
+   .\venv\Scripts\Activate.ps1
+   ```
+4. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```   
