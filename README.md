@@ -98,4 +98,11 @@ cd rag-doc-assistant
 
 This project was tested using content from:
    - **Spark:** The Definitive Guide(Bill Chambers & Matei Zaharia)
+
+## What This Demonstrates
+   - End-to-end RAG pipeline design
+   - Practical vector search with FAISS
+   - Real-world document QA
+   - Local LLM orchestration
+   - Clean project structure & reproducibility
      
