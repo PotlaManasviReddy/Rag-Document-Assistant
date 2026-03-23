@@ -61,26 +61,31 @@ cd rag-doc-assistant
      ```bash
      data/raw/
      ```
-6. **Load PDFs**
-   ```bash
-   python src/ingest.py
-   ```
-7. **Chunk documents**
-   ```bash
-   python src/chunk.py
-   ```
-9. **Generate embeddings & create vector store**
-   ```bash
-   python src/embed.py
-   ```
-10. Query programmatically
-    <small># Edit src/query.py to set your query, then run</small>
+## Usage Instructions
+
+**Step 1: Ingest PDFs**
+     ```bash
+     python src/ingest.py
+     ```
+**Step 2: Chunk Documents**
+     ```bash
+     python src/chunk.py
+     ```
+**Step 3: Generate Embeddings & Vector Store**
+     ```bash
+     python src/embed.py
+     ```
+**Step 4: Retrieval-Only Query**
+     ```bash
+     python src/query.py
+     ```
+<small>You will be prompted to enter a query at runtime.</small>
+
+**Step 5: Full Question Answering (RAG)**
     ```bash
-    python src/query.py
+    python src/qa.py
     ```
-10. **Interactive QA**
-      ```bash
-      python src/qa.py
+Ask natural-language questions and receive grounded answers.
       ```
      <small># Enter your question when prompted. Answers will be generated from your PDFs.</small>
 
