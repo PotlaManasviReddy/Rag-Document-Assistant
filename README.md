@@ -64,18 +64,20 @@ cd rag-doc-assistant
 ## Usage Instructions
 
 **Step 1: Ingest PDFs**
-
      ```bash
      python src/ingest.py
      ```
+     
 **Step 2: Chunk Documents**
      ```bash
      python src/chunk.py
      ```
+     
 **Step 3: Generate Embeddings & Vector Store**
      ```bash
      python src/embed.py
      ```
+     
 **Step 4: Retrieval-Only Query**
      ```bash
      python src/query.py
