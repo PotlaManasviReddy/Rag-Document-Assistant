@@ -13,3 +13,33 @@ The project is designed to provide a scalable, local-first QA system over your d
 ---
 
 ## Project Structure
+rag-doc-assistant/
+│
+├── data/
+│ ├── raw/ # Place your input PDF documents here
+│ └── processed/ # Stores chunked documents and vector store files
+│
+├── src/
+│ ├── ingest.py # Loads PDF files
+│ ├── chunk.py # Splits documents into chunks
+│ ├── embed.py # Generates embeddings and vector store
+│ ├── query.py # Programmatic querying interface
+│ ├── qa.py # Interactive question-answer interface
+│ └── blobs/ # Optional: intermediate storage for processed data
+│
+├── venv/ # Local virtual environment (excluded from GitHub)
+├── requirements.txt # Project dependencies
+└── README.md # Project documentation
+
+
+---
+
+## Setup Instructions
+
+1. **Clone the project**
+
+```bash
+git clone <your-repo-url>
+cd rag-doc-assistant
+
+2 Create a virtual environment
