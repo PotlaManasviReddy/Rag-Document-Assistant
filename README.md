@@ -72,7 +72,7 @@ cd rag-doc-assistant
    python src/embed.py
    ```
 10. Query programmatically
-    # Edit src/query.py to set your query, then run
+    <small># Edit src/query.py to set your query, then run</small>
     ```bash
     python src/query.py
     ```
