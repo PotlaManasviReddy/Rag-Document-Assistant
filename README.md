@@ -82,12 +82,13 @@ cd rag-doc-assistant
       ```
      <small># Enter your question when prompted. Answers will be generated from your PDFs.</small>
 
-**Notes**<br>
-Embeddings: Generated using sentence-transformers/all-MiniLM-L6-v2.<br>
-Vector Store: FAISS is used for fast semantic search.<br>
-LLM: Ollama’s gemma3:4b model generates answers.<br>
-Blobs folder: Optional intermediate storage for processed data.<br>
-Virtual Environment: Do not upload venv/ to GitHub. Use requirements.txt.<br>
-Ollama: Ensure the Ollama app is installed and running locally before using qa.py.<br>
-Prompting: Uses a single-question-based prompt to produce precise answers.<br>
+## Notes
+
+- **Embeddings:** Generated using `sentence-transformers/all-MiniLM-L6-v2`.
+- **Vector Store:** FAISS is used for fast semantic search.
+- **LLM:** Ollama’s `gemma3:4b` model generates answers.
+- **Blobs folder:** Optional intermediate storage for processed data.
+- **Virtual Environment:** Do not upload `venv/` to GitHub. Use `requirements.txt`.
+- **Ollama:** Ensure the Ollama app is installed and running locally before using `qa.py`.
+- **Prompting:** Uses a single-question-based prompt to produce precise answers.
      
