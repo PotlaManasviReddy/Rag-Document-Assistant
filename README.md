@@ -18,17 +18,18 @@ rag-doc-assistant/
 │
 ├── data/
 │ ├── raw/ # Place your input PDF documents here
-│ └── processed/ # Stores chunked documents and vector store files
+│ ├── processed/ # Stores chunked documents
+│ └── vectorstore/ # Stores embeddings & FAISS vector store
 │
 ├── src/
 │ ├── ingest.py # Loads PDF files
 │ ├── chunk.py # Splits documents into chunks
-│ ├── embed.py # Generates embeddings and vector store
-│ ├── query.py # Programmatic querying interface
+│ ├── embed.py # Generates embeddings & vector store
+│ ├── query.py # Programmatic query interface
 │ ├── qa.py # Interactive question-answer interface
 │ └── blobs/ # Optional: intermediate storage for processed data
 │
-├── venv/ # Local virtual environment (excluded from GitHub)
+├── venv/ # Local virtual environment (do NOT upload)
 ├── requirements.txt # Project dependencies
 └── README.md # Project documentation
 ```
