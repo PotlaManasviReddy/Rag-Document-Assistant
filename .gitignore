@@ -1,0 +1,15 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# PDF documents
+data/raw/*.pdf
+
+# Generated data
+data/processed/
+data/vectorstore/
+data/vectorstore_backup/
+
+# Local environment files
+.env

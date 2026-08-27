@@ -1,113 +1,321 @@
 # RAG Document Assistant
 
-## Project Overview
-The RAG (Retrieval-Augmented Generation) Document Assistant is a Python-based tool that allows users to query PDF documents and receive contextually relevant answers. It uses modern NLP techniques, combining:
+## Overview
 
-- **Document chunking** for splitting large PDFs into manageable pieces.
-- **Sentence embeddings** for semantic similarity.
-- **FAISS vector store** for fast retrieval of relevant chunks.
-- **Ollama’s Gemma3:4b LLM** to generate answers based on retrieved content.
+RAG Document Assistant is a local Retrieval-Augmented Generation system for asking questions about PDF documents.
 
-The project is designed to provide a scalable, local-first QA system over your document corpus.
+The project takes a PDF, splits it into smaller chunks, converts the chunks into vector embeddings, and stores them in a FAISS index. When a user asks a question, the system searches the vector store for the most relevant chunks and passes them as context to a local LLM running through Ollama.
 
----
+The current implementation uses `all-MiniLM-L6-v2` for embeddings and Gemma 3 4B for answer generation.
+
+I used *Spark: The Definitive Guide* as the document for testing the system.
+
+## Architecture
+
+```text
+                    PDF Document
+                         |
+                         v
+                  PDF Ingestion
+                         |
+                         v
+                   Text Chunking
+                         |
+                         v
+              Sentence Transformer
+              all-MiniLM-L6-v2
+                         |
+                         v
+                  FAISS Index
+                         |
+                         |
+                  User Question
+                         |
+                         v
+              Question Embedding
+                         |
+                         v
+              Similarity Search
+                         |
+                         v
+                Relevant Chunks
+                         |
+                         v
+                  Context + Query
+                         |
+                         v
+                    Ollama
+                         |
+                         v
+                   Gemma 3 4B
+                         |
+                         v
+                   Final Answer
+```
 
 ## Project Structure
-```
-rag-doc-assistant/
+
+```text
+Rag-Document-Assistant/
 │
 ├── data/
-│ ├── raw/ # Place your input PDF documents here
-│ ├── processed/ # Stores chunked documents
-│ └── vectorstore/ # Stores embeddings & FAISS vector store
+│   ├── raw/
+│   ├── processed/
+│   └── vectorstore/
+│       ├── index.faiss
+│       └── index.pkl
 │
 ├── src/
-│ ├── ingest.py # Loads PDF files
-│ ├── chunk.py # Splits documents into chunks
-│ ├── embed.py # Generates embeddings & vector store
-│ ├── query.py # Programmatic query interface
-│ ├── qa.py # Interactive question-answer interface
-│ └── blobs/ # Optional: intermediate storage for processed data
+│   ├── ingest.py
+│   ├── chunk.py
+│   ├── embed.py
+│   ├── query.py
+│   ├── qa.py
+│   └── blobs/
 │
-├── venv/ # Local virtual environment (do NOT upload)
-├── requirements.txt # Project dependencies
-└── README.md # Project documentation
+├── Requirements.txt
+└── README.md
 ```
 
----
+## Components
 
-## Setup Instructions
+### `ingest.py`
 
-1. **Clone the project**
+Loads the PDF document using PyPDF and prepares it for further processing.
+
+### `chunk.py`
+
+Splits the document into smaller chunks so that relevant sections can be retrieved instead of passing the entire document to the LLM.
+
+### `embed.py`
+
+Generates embeddings using `all-MiniLM-L6-v2` and builds the FAISS vector store.
+
+The current document was split into **3,092 chunks**.
+
+### `query.py`
+
+Takes a user question, converts it into an embedding, and performs similarity search against the FAISS index.
+
+It returns the most relevant document chunks.
+
+### `qa.py`
+
+Combines retrieval and generation.
+
+The retrieved document chunks are provided as context to Gemma 3 4B through Ollama, which generates the final answer.
+
+## Setup
+
+### 1. Clone the repository
 
 ```bash
 git clone <your-repo-url>
-cd rag-doc-assistant
 ```
-2. **Create a virtual environment**
-   ``` bash
-   python -m venv venv
-   ```
-3. **Activate the virtual environment**
-   ```bash
-   .\venv\Scripts\Activate.ps1
-   ```
-4. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```   
-5. **Add your PDF documents**
-     ```bash
-     data/raw/
-     ```
-## Usage Instructions
 
-**Step 1: Ingest PDFs**
-   ```bash
+### 2. Move into the project directory
+
+```bash
+cd Rag-Document-Assistant
+```
+
+### 3. Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+### 4. Activate the virtual environment
+
+Windows PowerShell:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+Mac/Linux:
+
+```bash
+source venv/bin/activate
+```
+
+### 5. Install dependencies
+
+```bash
+pip install -r Requirements.txt
+```
+
+### 6. Install Ollama
+
+Install Ollama and make sure it is running locally.
+
+### 7. Download Gemma 3 4B
+
+```bash
+ollama pull gemma3:4b
+```
+
+### 8. Add a PDF
+
+Place the PDF document inside:
+
+```text
+data/raw/
+```
+
+## Running the Project
+
+### Step 1: Ingest the PDF
+
+```bash
 python src/ingest.py
 ```
-     
-**Step 2: Chunk Documents**
-   ```bash
-     python src/chunk.py
+
+### Step 2: Create document chunks
+
+```bash
+python src/chunk.py
 ```
 
-**Step 3: Generate Embeddings & Vector Store**
-  ```bash
-  python src/embed.py
-  ```
-**Step 4: Retrieval-Only Query**
+### Step 3: Generate embeddings and build the FAISS index
+
+```bash
+python src/embed.py
+```
+
+### Step 4: Test retrieval
+
 ```bash
 python src/query.py
 ```
 
-<small>You will be prompted to enter a query at runtime.</small>
+Enter a question when prompted.
 
-**Step 5: Full Question Answering(RAG)**
-   ```bash
-     python src/qa.py
+Example:
+
+```text
+What is lazy evaluation in Spark?
 ```
 
+The program returns the most relevant chunks from the document.
 
-Ask natural-language questions and receive grounded answers.
+### Step 5: Run the complete RAG pipeline
 
-<small># Enter your question when prompted. Answers will be generated from your PDFs.</small>
+```bash
+python src/qa.py
+```
+
+Enter a question when prompted.
+
+The system retrieves relevant context from the document and uses Gemma 3 4B to generate the final answer.
+
+## Example
+
+### Question
+
+```text
+What is lazy evaluation in Spark?
+```
+
+### Retrieved Context
+
+The retrieval system identifies sections of the document discussing Spark's lazy evaluation model.
+
+### Generated Answer
+
+```text
+Lazy evaluation in Spark means that Spark does not immediately execute
+transformations. Instead, it builds a computation plan and waits until
+an action is triggered before executing the operations.
+```
+
+## Technical Details
+
+### Embeddings
+
+The project uses:
+
+```text
+sentence-transformers/all-MiniLM-L6-v2
+```
+
+The embedding model converts both document chunks and user queries into vector representations.
+
+### Vector Search
+
+FAISS is used for similarity search over the document embeddings.
+
+This allows the system to retrieve relevant chunks without searching through the raw document text directly.
+
+### Language Model
+
+Gemma 3 4B is served locally using Ollama.
+
+The model receives the user question together with the retrieved document context and generates the final response.
+
+### Local Inference
+
+The LLM runs locally through Ollama, so the document content does not need to be sent to an external LLM API during inference.
 
 ## Notes
 
-- **Embeddings:** Generated using `sentence-transformers/all-MiniLM-L6-v2`.
-- **Vector Store:** FAISS is used for fast semantic search.
-- **LLM:** Ollama’s `gemma3:4b` model generates answers.
-- **Blobs folder:** Optional intermediate storage for processed data.
-- **Virtual Environment:** Do not upload `venv/` to GitHub. Use `requirements.txt`.
-- **Ollama:** Ensure the Ollama app is installed and running locally before using `qa.py`.
-- **Prompting:** Uses a single-question-based prompt to produce precise answers.
+- The PDF used during development is kept outside the GitHub repository.
+- Generated vector store files do not need to be committed to the repository.
+- The `venv/` directory is a local Python environment and should not be uploaded.
+- Ollama must be running locally before using `qa.py`.
+- The embedding model is downloaded from Hugging Face when it is first used.
+- The current test document produced 3,092 chunks.
 
+## Current Status
 
-## What This Demonstrates
-   - End-to-end RAG pipeline design
-   - Practical vector search with FAISS
-   - Real-world document QA
-   - Local LLM orchestration
-   - Clean project structure & reproducibility
-     
+The current version supports:
+
+- PDF ingestion
+- Document chunking
+- Semantic embeddings
+- FAISS similarity search
+- Local LLM inference
+- Retrieval-Augmented Generation
+- Interactive question answering
+
+## Future Work
+
+### LLM Benchmarking
+
+Compare Gemma 3 4B and Llama 3 using the same:
+
+- Document
+- Embedding model
+- FAISS index
+- Questions
+- Retrieved context
+- Prompt structure
+
+The comparison will measure answer quality and system performance rather than relying only on subjective output.
+
+Planned metrics include:
+
+- Answer correctness
+- Context relevance
+- Faithfulness
+- Response latency
+- Response length
+- Performance across different question types
+
+### Evaluation Dataset
+
+Create a set of questions with reference answers from the source document and use the dataset to evaluate both models consistently.
+
+### Performance Analysis
+
+Analyze the results by question category and identify where each model performs better.
+
+## Technologies
+
+- Python
+- LangChain
+- Sentence Transformers
+- FAISS
+- Ollama
+- Gemma 3 4B
+- PyPDF

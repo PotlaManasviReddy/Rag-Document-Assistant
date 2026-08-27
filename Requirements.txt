@@ -1,6 +1,6 @@
-langchain-community==0.1.22
+langchain-community==0.2.19
 sentence-transformers==2.2.2
-faiss-cpu==1.7.4
+faiss-cpu==1.8.0
 ollama==0.1.4
 requests==2.31.0
 numpy==1.26.0
